@@ -7,8 +7,11 @@ const IndexPage: FC = () => {
     const [count, setCount] = useState(0)
 
     return (
-        <div className="App">
+        <div className="container mx-auto">
             <div>
+                <h1 className="bg-green-100">
+                    Hello world!
+                </h1>
                 <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
                     <img src={viteLogo} className="logo" alt="Vite logo" />
                 </a>
