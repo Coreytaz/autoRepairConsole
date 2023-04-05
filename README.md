@@ -2,7 +2,7 @@
 
 ## 🛠 Технологии
 
-- **UI**: `react`, `clsx`, `sass`
+- **UI**: `react`, `clsx`, `sass`, `tailwind`
 - **Lang**: `typescript`
 - **Routing**: `react-router-dom`
 - **Lint**: `eslint`, `prettier`
