@@ -8,6 +8,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    colors: {
+      primary: '#00B074',
+      primaryLight: 'rgba(0, 176, 116, 0.15)',
+      secondary: '#464255',
+    },
     extend: {
       fontFamily: {
         sans: ['Barlow', ...fontFamily.sans],
