@@ -1,1 +1,1 @@
-export * as cn from './cn';
+export * from './cn';
