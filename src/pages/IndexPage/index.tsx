@@ -3,8 +3,7 @@ import { FC, useState } from "react";
 import viteLogo from '~assets/vite.svg'
 import reactLogo from '~assets/react.svg'
 
-import LabelDemo1 from '~shared/ui/InputOne/'
-import LabelDemo2 from '~shared/ui/InputTwo'
+
 
 
 
@@ -37,7 +36,7 @@ const IndexPage: FC = () => {
                 Click on the Vite and React logos to learn more
             </p>
 
-            
+           
         </div>
     )
 }
