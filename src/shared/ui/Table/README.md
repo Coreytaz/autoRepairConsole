@@ -1,14 +1,12 @@
 # Таблица
 
 # Ипортировать
-``
-import { Table } from "~shared/ui";
-``
+
+`import { Table } from "~shared/ui";`
 
 ## Подключение
 
-``
-    const columns = [
+``   const columns = [
         {
             accessor: "name",
             Header: "NAME",
@@ -22,7 +20,6 @@ import { Table } from "~shared/ui";
             Header: "STATUS",
         },
     ];
-
     const rows = [
         {
             key: "1",
@@ -49,11 +46,9 @@ import { Table } from "~shared/ui";
             status: "Vacation",
         },
     ];
-
-    <Table columns={columns} data={rows} isPagination pageIndex={0} pageSize={2} isSearch />
+    <Table columns={columns} data={rows} isPagination pageIndex={0} pageSize={2} isSearch/>
 
 ``
-
 
 ## Типы
 
