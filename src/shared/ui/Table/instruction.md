@@ -1,9 +1,13 @@
-import { FC } from "react";
+# Таблица
 
+# Ипортировать
+``
 import { Table } from "~shared/ui";
+``
 
-const IndexPage: FC = () => {
+## Подключение
 
+``
     const columns = [
         {
             accessor: "name",
@@ -46,11 +50,12 @@ const IndexPage: FC = () => {
         },
     ];
 
-    return (
-        <div className="container mx-auto">
-            <Table columns={columns} data={rows} isPagination pageIndex={0} pageSize={2} isSearch />
-        </div>
-    )
-}
+    <Table columns={columns} data={rows} isPagination pageIndex={0} pageSize={2} isSearch />
+``
 
-export default IndexPage
+## Типы
+
+- **pageIndex?**: number - C какой страницы начало
+- **pageSize?**: number - Количество столбцов
+- **isSearch?**: boolean - Включение поиска
+- **isPagination?**: boolean - Включение страниц
