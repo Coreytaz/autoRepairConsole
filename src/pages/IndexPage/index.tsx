@@ -1,54 +1,36 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 
-import { Table } from "~shared/ui";
+import viteLogo from '~assets/vite.svg'
+import reactLogo from '~assets/react.svg'
 
 const IndexPage: FC = () => {
-
-    const columns = [
-        {
-            accessor: "name",
-            Header: "NAME",
-        },
-        {
-            accessor: "role",
-            Header: "ROLE",
-        },
-        {
-            accessor: "status",
-            Header: "STATUS",
-        },
-    ];
-
-    const rows = [
-        {
-            key: "1",
-            name: "Tony Reichert",
-            role: "CEO",
-            status: "Active",
-        },
-        {
-            key: "2",
-            name: "Zoey Lang",
-            role: "Technical Lead",
-            status: "Paused",
-        },
-        {
-            key: "3",
-            name: "Jane Fisher",
-            role: "Senior Developer",
-            status: "Active",
-        },
-        {
-            key: "4",
-            name: "William Howard",
-            role: "Community Manager",
-            status: "Vacation",
-        },
-    ];
+    const [count, setCount] = useState(0)
 
     return (
         <div className="container mx-auto">
-            <Table columns={columns} data={rows} isPagination pageIndex={0} pageSize={2} isSearch />
+            <div>
+                <h1 className="bg-green-100">
+                    Hello world!
+                </h1>
+                <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
+                    <img src={viteLogo} className="logo" alt="Vite logo" />
+                </a>
+                <a href="https://reactjs.org" target="_blank" rel="noreferrer">
+                    <img src={reactLogo} className="logo react" alt="React logo" />
+                </a>
+            </div>
+            <h1>Vite + React</h1>
+            <div className="card">
+                <button onClick={() => setCount((count) => count + 1)}>
+                    count is {count}
+                </button>
+                <p>
+                    Edit <code>src/App.tsx</code> and save to test HMR
+                </p>
+            </div>
+            <p className="read-the-docs">
+                Click on the Vite and React logos to learn more
+            </p>
         </div>
     )
 }
