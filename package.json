@@ -10,6 +10,7 @@
     "lint:fix": "eslint src --resolve-plugins-relative-to \"./src/**/*.{js,jsx,ts,tsx}\" --fix"
   },
   "dependencies": {
+    "@radix-ui/react-label": "^2.0.1",
     "class-variance-authority": "^0.5.1",
     "clsx": "^1.2.1",
     "compose-function": "^3.0.3",
