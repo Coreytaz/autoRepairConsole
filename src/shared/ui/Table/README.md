@@ -6,7 +6,8 @@
 
 ## Подключение
 
-``   const columns = [
+```
+  const columns = [
         {
             accessor: "name",
             Header: "NAME",
@@ -20,6 +21,7 @@
             Header: "STATUS",
         },
     ];
+    
     const rows = [
         {
             key: "1",
@@ -46,9 +48,9 @@
             status: "Vacation",
         },
     ];
-    <Table columns={columns} data={rows} isPagination pageIndex={0} pageSize={2} isSearch/>
 
-``
+    <Table columns={columns} data={rows} isPagination pageIndex={0} pageSize={2} isSearch/>
+```
 
 ## Типы
 
