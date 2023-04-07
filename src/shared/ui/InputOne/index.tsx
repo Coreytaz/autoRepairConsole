@@ -5,7 +5,7 @@ import { cn } from "~shared/lib"
 
 const LabelDemo1 = () => (
   <div className="flex flex-wrap items-center gap-[15px] px-5">
-    <Label.Root className="text-[15px] font-medium leading-[35px] text-gray-700" htmlFor="firstName">
+    <Label.Root className="text-[15px] font-medium leading-[35px] text-gray-700" htmlFor="Label">
        
     </Label.Root>
     <div className="relative flex items-center text-gray-400 focus-within-gray-600">

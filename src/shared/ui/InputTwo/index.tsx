@@ -1,9 +1,10 @@
 import React from 'react';
 import * as Label from '@radix-ui/react-label';
+import { cn } from "~shared/lib"
 
 const LabelDemo2 = () => (
   <div className="flex flex-wrap items-center gap-[15px] px-5">
-    <Label.Root className="text-[15px] font-medium leading-[35px] text-gray-700" htmlFor="firstName">
+    <Label.Root className="text-[15px] font-medium leading-[35px] text-gray-700" htmlFor="Label">
       ФИО
     </Label.Root>
     <input
