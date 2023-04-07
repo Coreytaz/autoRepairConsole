@@ -51,7 +51,9 @@ import { Table } from "~shared/ui";
     ];
 
     <Table columns={columns} data={rows} isPagination pageIndex={0} pageSize={2} isSearch />
+
 ``
+
 
 ## Типы
 
