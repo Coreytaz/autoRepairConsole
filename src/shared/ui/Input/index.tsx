@@ -46,7 +46,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>(({ icon, className, variant
           id={id}
           {...props}
         />
-        <span className="[&>svg]:w-4 [&>svg]:h-4 [&>svg]:absolute [&>svg]:top-1/2 [&>svg]:right-2 [&>svg]:translate-y-[-50%] [&>svg]:stroke-[#A4A4A4]">{icon ? icon : null}</span>
+        {icon ? <span className="[&>svg]:w-4 [&>svg]:h-4 [&>svg]:absolute [&>svg]:top-1/2 [&>svg]:right-2 [&>svg]:translate-y-[-50%] [&>svg]:stroke-[#A4A4A4]">{icon}</span> : null}
       </div>
     </div >
   )
