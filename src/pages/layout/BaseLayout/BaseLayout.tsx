@@ -1,13 +1,24 @@
 import { FC } from 'react';
 import { Outlet } from 'react-router-dom';
 
+import { Sidebar } from '~widgets/Sidebar';
+
+
+
+
+
+
 export interface BaseLayoutProps extends Partial<ComponentWithChildren> { }
 
 export const BaseLayout: FC<BaseLayoutProps> = ({ children }) => {
     return (
-        <>
-            {children}
-            < Outlet />
-        </>
+        <div className='grid grid-cols-[310px_1fr] grid-rows-[75px_1fr] min-h-screen'>
+            <Sidebar className='bg-white row-span-2 col-span-1' />
+            <header></header>
+            <main className=''>
+                {children}
+                <Outlet />
+            </main>
+        </div>
     );
 };
