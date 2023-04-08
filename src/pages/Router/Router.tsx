@@ -1,11 +1,11 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
 
-import { RoutesUrls } from '~shared/lib/router';
+import { lazy } from 'react';
 
+import { RoutesUrls } from '~shared/lib/router';
 import { BaseLayout } from '~pages/layout';
 
-import IndexPage from '../IndexPage';
-
+const IndexPage = lazy(() => import('~pages/IndexPage'));
 
 export const Router = () => {
     const location = useLocation();
