@@ -36,18 +36,16 @@ const Input = forwardRef<HTMLDivElement, InputProps>(({ icon, className, variant
   const id = useId()
 
   return (
-    <div className="flex flex-wrap items-center gap-[15px] px-5">
+    <div className="relative">
       <Label htmlFor={id}>{label}</Label>
-      <div className="relative flex items-center focus-within-gray-600">
-        <input
-          className={cn(inputVariants({ variant, className }), {
-            'px-3': !icon
-          })}
-          id={id}
-          {...props}
-        />
-        {icon ? <span className="[&>svg]:w-4 [&>svg]:h-4 [&>svg]:absolute [&>svg]:top-1/2 [&>svg]:right-2 [&>svg]:translate-y-[-50%] [&>svg]:stroke-[#A4A4A4]">{icon}</span> : null}
-      </div>
+      <input
+        className={cn(inputVariants({ variant, className }), {
+          'px-3': !icon
+        })}
+        id={id}
+        {...props}
+      />
+      {icon ? <span className="absolute [&>svg]:w-4 [&>svg]:h-4 top-1/2 right-2 translate-y-[-50%] [&>svg]:stroke-[#A4A4A4]">{icon}</span> : null}
     </div >
   )
 });
