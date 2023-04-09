@@ -4,11 +4,11 @@ import { VariantProps, cva } from "class-variance-authority"
 
 import React, { ForwardedRef } from 'react'
 
-import classname from 'clsx'
-
-import { ArrowDown, ArrowUp } from 'lucide-react'
+import { ArrowDown, ArrowUp, ChevronFirst, ChevronLast, ChevronLeft, ChevronRight } from 'lucide-react'
 
 import { cn } from "~shared/lib"
+
+import { Button, Input, Typography } from '~shared/ui'
 
 import { GlobalFilter } from './globalFilter'
 
@@ -47,7 +47,7 @@ const Table = React.forwardRef(<T extends readonly Column<{}>[], D extends reado
     setPageSize,
     setGlobalFilter,
     preGlobalFilteredRows,
-    state: { globalFilter }
+    state: { globalFilter, pageIndex: _pageIndex }
   } = useTable({
     columns,
     data,
@@ -67,7 +67,7 @@ const Table = React.forwardRef(<T extends readonly Column<{}>[], D extends reado
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column, i) => (
-                <th {...column.getHeaderProps(column.getSortByToggleProps())} className={classname("px-5 py-2", {
+                <th {...column.getHeaderProps(column.getSortByToggleProps())} className={cn("px-5 py-2", {
                   'rounded-r-2xl': i === headerGroup.headers.length - 1,
                   'rounded-l-2xl': i === 0
                 })}>{column.render('Header')}
@@ -86,11 +86,11 @@ const Table = React.forwardRef(<T extends readonly Column<{}>[], D extends reado
             prepareRow(row)
 
             return (
-              <tr  {...row.getRowProps()} className={classname("rounded-2xl shadow-md text-center", {
+              <tr  {...row.getRowProps()} className={cn("rounded-2xl shadow-md text-center", {
                 'bg-gray-200': i % 2 === 1
               })}>
                 {row.cells.map((cell, i) => {
-                  return <td {...cell.getCellProps()} className={classname("px-5 py-2", {
+                  return <td {...cell.getCellProps()} className={cn("px-5 py-2", {
                     'rounded-r-2xl': i === row.cells.length - 1,
                     'rounded-l-2xl': i === 0
                   })}>{cell.render('Cell')}</td>
@@ -100,50 +100,47 @@ const Table = React.forwardRef(<T extends readonly Column<{}>[], D extends reado
           })}
         </tbody>
       </table>
-      {isPagination ? <div className="pagination">
-        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-          {'<<'}
-        </button>{' '}
-        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-          {'<'}
-        </button>{' '}
-        <button onClick={() => nextPage()} disabled={!canNextPage}>
-          {'>'}
-        </button>{' '}
-        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-          {'>>'}
-        </button>{' '}
-        <span>
-          Страниц{' '}
-          <strong>
-            {pageIndex! + 1} из {pageOptions.length}
-          </strong>{' '}
-        </span>
-        <span>
-          | Перейти на страницу:{' '}
-          <input
+      {isPagination ? <div className="flex items-center justify-between gap-3 mt-2">
+        <div className='flex gap-2'>
+          <Button onClick={() => gotoPage(0)} disabled={!canPreviousPage} icon={<ChevronFirst />} />
+          <Button onClick={() => previousPage()} disabled={!canPreviousPage} icon={<ChevronLeft />} />
+          <Button onClick={() => nextPage()} disabled={!canNextPage} icon={<ChevronRight />} />
+          <Button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage} icon={<ChevronLast />} />
+        </div>
+        <div className='flex items-center gap-2'>
+          <Typography tag='span'>
+            Страниц{' '}
+            <strong>
+              {_pageIndex + 1} из {pageOptions.length}
+            </strong>{' '}
+          </Typography>
+          <Input
+            label='Перейти на страницу:'
             type="number"
-            defaultValue={pageIndex! + 1}
+            className='max-w-[60px] appearance-none'
+            defaultValue={_pageIndex + 1}
+            value={_pageIndex + 1}
             onChange={e => {
               const page = e.target.value ? Number(e.target.value) - 1 : 0
               gotoPage(page)
             }}
             style={{ width: '100px' }}
           />
-        </span>{' '}
-        <select
-          value={pageSize}
-          onChange={e => {
-            setPageSize(Number(e.target.value))
-          }}
-        >
-          {[10, 20, 30, 40, 50].map(pageSize => (
-            <option key={pageSize} value={pageSize}>
-              Показать {pageSize}
-            </option>
-          ))}
-        </select>
-      </div> : null}
+          <select
+            value={_pageIndex}
+            onChange={e => {
+              setPageSize(Number(e.target.value))
+            }}
+          >
+            {[10, 20, 30, 40, 50].map(pageSize => (
+              <option key={pageSize} value={pageSize}>
+                Показать {pageSize}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div > : null
+      }
     </>
   )
 })
