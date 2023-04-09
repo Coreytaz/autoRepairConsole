@@ -1,14 +1,11 @@
 /* eslint-disable react/jsx-key */
 import { Column, useFilters, useGlobalFilter, usePagination, useSortBy, useTable } from 'react-table'
 import { VariantProps, cva } from "class-variance-authority"
-
 import React, { ForwardedRef } from 'react'
-
 import { ArrowDown, ArrowUp, ChevronFirst, ChevronLast, ChevronLeft, ChevronRight } from 'lucide-react'
 
 import { cn } from "~shared/lib"
-
-import { Button, Input, Typography } from '~shared/ui'
+import { Button, DropdownMenu, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger, Input, Typography } from '~shared/ui'
 
 import { GlobalFilter } from './globalFilter'
 
@@ -26,8 +23,6 @@ export interface TableProps<T, D>
   columns: T
   data: D
 }
-
-
 
 const Table = React.forwardRef(<T extends readonly Column<{}>[], D extends readonly {}[]>({ className, columns, data, pageIndex = 0, isPagination, pageSize = 10, isSearch, ...props }: TableProps<T, D>, ref: ForwardedRef<HTMLTableElement>) => {
 
@@ -47,13 +42,12 @@ const Table = React.forwardRef(<T extends readonly Column<{}>[], D extends reado
     setPageSize,
     setGlobalFilter,
     preGlobalFilteredRows,
-    state: { globalFilter, pageIndex: _pageIndex }
+    state: { globalFilter, pageIndex: _pageIndex, pageSize: _pageSize }
   } = useTable({
     columns,
     data,
     initialState: { pageIndex, pageSize }
   }, useFilters, useGlobalFilter, useSortBy, usePagination)
-
 
   return (
     <>
@@ -126,18 +120,22 @@ const Table = React.forwardRef(<T extends readonly Column<{}>[], D extends reado
             }}
             style={{ width: '100px' }}
           />
-          <select
-            value={_pageIndex}
-            onChange={e => {
-              setPageSize(Number(e.target.value))
-            }}
-          >
-            {[10, 20, 30, 40, 50].map(pageSize => (
-              <option key={pageSize} value={pageSize}>
-                Показать {pageSize}
-              </option>
-            ))}
-          </select>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <div className='cursor-pointer'>
+                Показать {_pageSize}
+              </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-30">
+              <DropdownMenuRadioGroup value={_pageIndex.toString()} onValueChange={(value) => setPageSize(Number(value))}>
+                {[pageSize, 20, 30, 40, 50].map(pageSize => (
+                  <DropdownMenuRadioItem key={pageSize} value={pageSize.toString()} >
+                    Показать {pageSize}
+                  </DropdownMenuRadioItem>
+                ))}
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div > : null
       }
