@@ -25,7 +25,7 @@ const inputVariants = cva(
 )
 
 export interface InputProps
-  extends React.HTMLAttributes<HTMLInputElement>,
+  extends React.InputHTMLAttributes<HTMLInputElement>,
   VariantProps<typeof inputVariants> {
   icon?: ReactNode
   label?: string
