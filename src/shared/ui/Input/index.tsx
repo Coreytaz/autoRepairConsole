@@ -37,7 +37,7 @@ const Input = forwardRef<HTMLDivElement, InputProps>(({ icon, className, variant
 
   return (
     <div className="relative">
-      <Label htmlFor={id}>{label}</Label>
+      {label ? <Label htmlFor={id} className="mr-3">{label}</Label> : null}
       <input
         className={cn(inputVariants({ variant, className }), {
           'px-3': !icon
