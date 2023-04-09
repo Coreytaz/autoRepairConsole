@@ -16,7 +16,7 @@ export const BaseLayout: FC<BaseLayoutProps> = ({ children }) => {
         <div className='grid grid-cols-[310px_1fr] grid-rows-[75px_1fr] min-h-screen gap-x-8'>
             <Sidebar className='bg-white row-span-2 col-span-1' />
             <Header />
-            <main className=''>
+            <main>
                 {children}
                 <Outlet />
             </main>
