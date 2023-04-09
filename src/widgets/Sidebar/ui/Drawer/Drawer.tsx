@@ -1,6 +1,7 @@
 import { FC, ReactNode, useEffect, useMemo, useState } from 'react';
 import { Link, matchPath } from 'react-router-dom';
-import cn from 'clsx'
+
+import { Button } from '~shared/ui';
 
 export interface NavItem {
     Icon?: ReactNode;
@@ -38,18 +39,9 @@ export const Drawer: FC<DrawerProps> = ({ routes, currentPath }) => {
 
         return (
             <Link key={path} to={path}>
-                <button
-                    className={cn(`font-sans text-lg font-medium flex cursor-pointer items-center gap-4 rounded-lg px-4 py-2 w-[260px]`, {
-                        'text-primary bg-primaryLight': selected,
-                        'text-secondary bg-transparent': !selected
-                    })}
-                >
-                    <span className={cn("", {
-                        '[&>svg]:stroke-primary': selected,
-                        '[&>svg]:stroke-secondary': !selected
-                    })}>{Icon}</span>
+                <Button variant='ghost' className='w-[260px]' isActive={selected} icon={Icon}>
                     {title}
-                </button>
+                </Button>
             </Link>
         );
     };

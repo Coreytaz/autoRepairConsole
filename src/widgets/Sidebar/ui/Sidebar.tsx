@@ -1,7 +1,7 @@
 import { FC, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { HomeIcon, List, ListChecks, Pen, User } from 'lucide-react';
+import { HomeIcon, List, ListChecks, Pen, Users } from 'lucide-react';
 
 import { RoutesUrls } from '~shared/lib/router';
 
@@ -21,7 +21,7 @@ export const Sidebar: FC<SidebarProps> = ({ ...props }) => {
             { title: 'Главная', path: RoutesUrls.root, Icon: <HomeIcon /> },
             { title: 'История заказов', path: RoutesUrls.historyOrder, Icon: <List /> },
             { title: 'Создать заказ-наряда', path: RoutesUrls.CreateWorkOrder, Icon: <Pen /> },
-            { title: 'Список сотрудников', path: RoutesUrls.Employees, Icon: <User /> },
+            { title: 'Список сотрудников', path: RoutesUrls.Employees, Icon: <Users /> },
             { title: 'Статус заказа', path: RoutesUrls.OrderStatus, Icon: <ListChecks /> },
         ],
         []
