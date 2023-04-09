@@ -19,7 +19,7 @@ const typographyVariants = cva('color-secondary font-family-sans not-italic', {
 export interface TypographyProps
     extends React.HTMLAttributes<TypographyTag>,
     VariantProps<typeof typographyVariants> {
-    tag?: TypographyTag;
+    tag: TypographyTag;
     children: React.ReactNode;
 }
 
