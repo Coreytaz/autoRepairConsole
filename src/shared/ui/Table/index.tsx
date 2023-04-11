@@ -111,6 +111,7 @@ const Table = React.forwardRef(<T extends readonly Column<{}>[], D extends reado
           <Input
             label='Перейти на страницу:'
             type="number"
+            variant='dark'
             className='max-w-[60px] appearance-none'
             defaultValue={_pageIndex + 1}
             value={_pageIndex + 1}

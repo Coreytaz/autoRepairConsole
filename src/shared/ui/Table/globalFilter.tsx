@@ -26,7 +26,7 @@ export const GlobalFilter = ({
 
     return (
         <div className='mb-6 mt-6 flex items-center'>
-            <Input label="Поиск:" value={value || ""} onChange={(e) => {
+            <Input variant='dark' label="Поиск:" value={value || ""} onChange={(e) => {
                 setValue(e.target.value);
                 onChange(e.target.value);
             }} placeholder={`${count} записи...`} />
