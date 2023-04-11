@@ -2,12 +2,12 @@
 import { Column, useFilters, useGlobalFilter, usePagination, useSortBy, useTable } from 'react-table'
 import { VariantProps, cva } from "class-variance-authority"
 import React, { ForwardedRef } from 'react'
-import { ArrowDown, ArrowUp, ChevronFirst, ChevronLast, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ArrowDown, ArrowUp } from 'lucide-react'
 
 import { cn } from "~shared/lib"
-import { Button, DropdownMenu, DropdownMenuContent, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuTrigger, Input, Typography } from '~shared/ui'
 
 import { GlobalFilter } from './globalFilter'
+import Pagination from './pagination'
 
 const tableVariants = cva(
   "w-full text-base font-medium text-secondary overflow-x-auto border-separate border-spacing-y-[8px]"
@@ -94,51 +94,7 @@ const Table = React.forwardRef(<T extends readonly Column<{}>[], D extends reado
           })}
         </tbody>
       </table>
-      {isPagination ? <div className="flex items-center justify-between gap-3 mt-2">
-        <div className='flex gap-2'>
-          <Button onClick={() => gotoPage(0)} disabled={!canPreviousPage} icon={<ChevronFirst />} />
-          <Button onClick={() => previousPage()} disabled={!canPreviousPage} icon={<ChevronLeft />} />
-          <Button onClick={() => nextPage()} disabled={!canNextPage} icon={<ChevronRight />} />
-          <Button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage} icon={<ChevronLast />} />
-        </div>
-        <div className='flex items-center gap-2'>
-          <Typography tag='span'>
-            Страниц{' '}
-            <strong>
-              {_pageIndex + 1} из {pageOptions.length}
-            </strong>{' '}
-          </Typography>
-          <Input
-            label='Перейти на страницу:'
-            type="number"
-            variant='dark'
-            className='max-w-[60px] appearance-none'
-            defaultValue={_pageIndex + 1}
-            value={_pageIndex + 1}
-            onChange={e => {
-              const page = e.target.value ? Number(e.target.value) - 1 : 0
-              gotoPage(page)
-            }}
-            style={{ width: '100px' }}
-          />
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <div className='cursor-pointer'>
-                Показать {_pageSize}
-              </div>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-30">
-              <DropdownMenuRadioGroup value={_pageIndex.toString()} onValueChange={(value) => setPageSize(Number(value))}>
-                {[pageSize, 20, 30, 40, 50].map(pageSize => (
-                  <DropdownMenuRadioItem key={pageSize} value={pageSize.toString()} >
-                    Показать {pageSize}
-                  </DropdownMenuRadioItem>
-                ))}
-              </DropdownMenuRadioGroup>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      </div > : null
+      {isPagination ? <Pagination gotoPage={gotoPage} previousPage={previousPage} nextPage={nextPage} canNextPage={canNextPage} pageCount={pageCount} _pageSize={_pageSize} pageSize={pageSize} canPreviousPage={canPreviousPage} _pageIndex={_pageIndex} pageOptions={pageOptions} setPageSize={setPageSize} /> : null
       }
     </>
   )
