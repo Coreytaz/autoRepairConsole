@@ -11,7 +11,7 @@ function range(start: number, end: number) {
 const AvtoInfo: FC<{ methods: UseFormReturn<FieldValues, any> }> = ({ methods }) => {
     const { next, prev } = useSteps()
 
-    const onSubmit = (data: any) => {
+    const onSubmit = () => {
         next()
     }
 

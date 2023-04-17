@@ -1,16 +1,30 @@
-import { FC, useMemo } from 'react'
-import { FieldValues, UseFormReturn, useForm } from 'react-hook-form';
+/* eslint-disable no-console */
+import { FC, useEffect, useMemo } from 'react'
+import { FieldValues, UseFormReturn } from 'react-hook-form';
 import { useSteps } from 'react-step-builder';
 
-import { BaseRadioField, BaseTextField, Button, Typography } from '~shared/ui';
+import { BaseRadioField, BaseTextField, Button, Typography, useToast } from '~shared/ui';
 
 const ServiceInfo: FC<{ methods: UseFormReturn<FieldValues, any> }> = ({ methods }) => {
-    const { next, prev } = useSteps()
+    const { toast } = useToast()
+    const { prev, jump } = useSteps()
 
     const onSubmit = (data: any) => {
-        next()
+        toast({
+            title: "Данные успешно отправлены!",
+            description: JSON.stringify(data)
+        })
+
         console.log(data)
+
+        jump(1)
     }
+
+    useEffect(() => {
+        if (methods.formState.isSubmitSuccessful) {
+            methods.reset();
+        }
+    }, [methods.reset, methods.formState, methods]);
 
     const ServiceSelectionItem = useMemo(() => [
         {
@@ -44,7 +58,7 @@ const ServiceInfo: FC<{ methods: UseFormReturn<FieldValues, any> }> = ({ methods
                         required />
                     <BaseTextField
                         className='h-10'
-                        name="Model"
+                        name="Price"
                         type='text'
                         required
                         labelName='Стоимость'
