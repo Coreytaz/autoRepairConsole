@@ -6,4 +6,5 @@ export * from './button';
 export * from './Avatar';
 export * from './DropDownMenu';
 export * from './Form';
+export * from './Toast';
 export { default as Table } from './Table';

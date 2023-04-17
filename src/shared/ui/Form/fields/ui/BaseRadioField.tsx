@@ -65,7 +65,12 @@ export const BaseRadioField: React.FC<BaseRadioFieldProps<selectItemProps[]>> = 
                                     error={!!fieldState.error}
                                     helperText={fieldState?.error?.message}
                                     {...props}
-                                    value={title(field.value)}
+                                    {...field}
+                                    value={title(field.value) || ''}
+                                    onChange={(value) => {
+                                        field.onChange(value);
+                                        onChange && onChange(value);
+                                    }}
                                     icon={<ChevronDown />} />
                             </div>
                         </DropdownMenuTrigger>
@@ -79,8 +84,7 @@ export const BaseRadioField: React.FC<BaseRadioFieldProps<selectItemProps[]>> = 
                                     icon={search.length > 0 ? <span className="cursor-pointer" onClick={() => setSearch('')}><X /></span> : null} />
                             </DropdownMenuLabel>
                             <DropdownMenuSeparator />
-                            <DropdownMenuRadioGroup className="h-32 overflow-scroll overflow-x-hidden"
-                                value={field.value}
+                            <DropdownMenuRadioGroup className="h-32 overflow-scroll overflow-x-hidden" {...field}
                                 onValueChange={(value) => {
                                     field.onChange(value);
                                 }}>
