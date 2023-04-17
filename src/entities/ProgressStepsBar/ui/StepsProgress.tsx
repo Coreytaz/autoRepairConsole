@@ -1,4 +1,5 @@
 import { Check } from 'lucide-react';
+import React from 'react';
 import { FC, useMemo } from 'react';
 import { useSteps } from 'react-step-builder';
 
@@ -17,8 +18,8 @@ const StepsProgress: FC<StepsProgressProps> = ({ ...props }) => {
       <div className="flex pb-3">
         {
           totalProggresSteps.map((step) => (
-            <>
-              <div className="flex-1" key={step}>
+            <React.Fragment key={step}>
+              <div className="flex-1">
                 <div className={cn("w-10 h-10 mx-auto rounded-full text-lg text-white flex items-center", {
                   'bg-white border-2 border-gray-200': current <= step,
                   'bg-primary': current > step
@@ -42,7 +43,7 @@ const StepsProgress: FC<StepsProgressProps> = ({ ...props }) => {
                   ></div>
                 </div>
               </div> : null}
-            </>
+            </React.Fragment>
           ))
         }
       </div>
