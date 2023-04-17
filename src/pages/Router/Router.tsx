@@ -8,6 +8,7 @@ import { BaseLayout } from '~pages/layout';
 const IndexPage = lazy(() => import('~pages/IndexPage'));
 const HistoryOrderPage = lazy(() => import('~pages/HistoryOrder'));
 const EmployeesListPage = lazy(() => import('~pages/employeesList'));
+const OrderStatus = lazy(() => import('~pages/orderstatus'));
 const CreateWorkOrder = lazy(() => import('~pages/createWorkOrder'));
 
 export const Router = () => {
@@ -19,7 +20,7 @@ export const Router = () => {
                 <Route index element={<IndexPage />} />
                 <Route path={RoutesUrls.CreateWorkOrder} element={<CreateWorkOrder />} />
                 <Route path={RoutesUrls.Employees} element={<EmployeesListPage />} />
-                <Route path={RoutesUrls.OrderStatus} element={<h1>Страница не найдена</h1>} />
+                <Route path={RoutesUrls.OrderStatus} element={<OrderStatus />} />
                 <Route path={RoutesUrls.historyOrder} element={<HistoryOrderPage />} />
             </Route>
 
