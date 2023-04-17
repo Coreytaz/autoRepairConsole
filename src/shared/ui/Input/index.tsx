@@ -6,6 +6,8 @@ import { cn } from "~shared/lib"
 
 import { Label } from "../Label";
 
+import { normalizeNumberTel, normalizeStateNumber } from "./normalizeInput";
+
 const inputVariants = cva(
   "w-full bg-white px-3 py-2 pr-7 border-solid border-1 border-[#EBEBEB] appearance-none rounded-lg leading-none outline-none focus:shadow-[0_0_0_1px_black]",
   {
@@ -33,21 +35,6 @@ export interface InputProps
   labelName?: string
 }
 
-const normalizeNumberTel = (value: string) => {
-  const cleanedValue = value.replace(/\D/g, '').slice(0, 11);
-
-  const match = cleanedValue.match(/^(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,4})$/);
-
-  if (match) {
-    const formattedValue = `${match[0] ? `+7` : ''}${match[1] ? ` ${match[2]}` : ''}${match[3] ? ` ${match[3].substring(0, 3)}` : ''}${match[4] ? `-${match[4].substring(0, 4)}` : ''}`;
-
-    return formattedValue;
-  }
-
-  return value;
-}
-
-
 const Input = forwardRef<HTMLInputElement, InputProps>(({ icon, className, variant, labelName, error, helperText, onChange, ...props }, ref) => {
   const id = useId()
 
@@ -59,6 +46,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({ icon, className, varia
           onChange={(e) => {
             if (props.type === 'tel') {
               e.target.value = normalizeNumberTel(e.target.value)
+            }
+
+            if (props.type === 'StateNumber') {
+              e.target.value = normalizeStateNumber(e.target.value)
             }
 
             onChange?.(e)
