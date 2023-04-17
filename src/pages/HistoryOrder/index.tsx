@@ -7,15 +7,12 @@ import { Typography } from '~shared/ui';
 const HistoryOrderPage: FC = () => {
   return (
     <div className='mt-7 mx-8'>
-      <div className='pb-6'  >
+      <div className='pb-6'>
         <Typography tag='h2' className="font-semibold">История заказов</Typography>
       </div>
       <Card className='w-full h-full' variant='default'>
-
         <div className='px-7 pt-2 pb-7'>
-          <>
-            <Table className='' columns={columns} data={rows} isPagination pageIndex={0} pageSize={10} isSearch />
-          </>
+          <Table className='' columns={columns} data={rows} isPagination isSearch />
         </div>
       </Card>
     </div>

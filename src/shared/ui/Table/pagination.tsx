@@ -43,14 +43,13 @@ const Pagination: FC<PaginationProps> = ({
                     Страниц{' '}
                     <strong>
                         {_pageIndex + 1} из {pageOptions.length}
-                    </strong>{' '}
+                    </strong>
                 </Typography>
                 <Input
-                    label='Перейти на страницу:'
+                    labelName='Перейти на страницу:'
                     type="number"
                     variant='dark'
                     className='max-w-[60px] appearance-none'
-                    defaultValue={_pageIndex + 1}
                     value={_pageIndex + 1}
                     onChange={e => {
                         const page = e.target.value ? Number(e.target.value) - 1 : 0
