@@ -38,12 +38,9 @@ const Pagination: FC<PaginationProps> = ({
                 <Button onClick={() => nextPage()} disabled={!canNextPage} icon={<ChevronRight />} />
                 <Button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage} icon={<ChevronLast />} />
             </div>
-            <div className='flex items-center gap-2'>
-                <Typography tag='span'>
-                    Страниц{' '}
-                    <strong>
-                        {_pageIndex + 1} из {pageOptions.length}
-                    </strong>
+            <div className='flex items-center gap-3'>
+                <Typography tag='span' className="whitespace-nowrap">
+                    Страниц <strong>{_pageIndex + 1} из {pageOptions.length}</strong>
                 </Typography>
                 <Input
                     labelName='Перейти на страницу:'
@@ -59,14 +56,14 @@ const Pagination: FC<PaginationProps> = ({
                 />
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <div className='cursor-pointer'>
+                        <div className='cursor-pointer whitespace-nowrap'>
                             Показать {_pageSize}
                         </div>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent className="w-30">
                         <DropdownMenuRadioGroup value={_pageIndex.toString()} onValueChange={(value) => setPageSize(Number(value))}>
                             {[pageSize, 20, 30, 40, 50].map(pageSize => (
-                                <DropdownMenuRadioItem key={pageSize} value={pageSize.toString()} >
+                                <DropdownMenuRadioItem key={pageSize} value={pageSize.toString()}>
                                     Показать {pageSize}
                                 </DropdownMenuRadioItem>
                             ))}

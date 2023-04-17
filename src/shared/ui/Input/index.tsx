@@ -54,7 +54,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({ icon, className, varia
   return (
     <>
       <div className="relative flex items-center gap-3 w-full">
-        {labelName ? <Label htmlFor={id} className="grow whitespace-nowrap">{labelName}</Label> : null}
+        {labelName ? <Label htmlFor={id} className="whitespace-nowrap">{labelName}</Label> : null}
         <input
           onChange={(e) => {
             if (props.type === 'tel') {
