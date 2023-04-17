@@ -45,9 +45,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
-        <span className={cn("", {
+        {icon ? <span className={cn("", {
           '[&>svg]:stroke-primary': isActive,
-        })}>{icon}</span>
+        })}>{icon}</span> : null}
         {children}
       </button>
     )
