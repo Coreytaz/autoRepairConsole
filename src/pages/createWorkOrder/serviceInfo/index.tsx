@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { FC, useEffect, useMemo } from 'react'
+import { FC, useMemo } from 'react'
 import { FieldValues, UseFormReturn } from 'react-hook-form';
 import { useSteps } from 'react-step-builder';
 
@@ -17,14 +17,10 @@ const ServiceInfo: FC<{ methods: UseFormReturn<FieldValues, any> }> = ({ methods
 
         console.log(data)
 
+        methods.reset();
+
         jump(1)
     }
-
-    useEffect(() => {
-        if (methods.formState.isSubmitSuccessful) {
-            methods.reset();
-        }
-    }, [methods.reset, methods.formState, methods]);
 
     const ServiceSelectionItem = useMemo(() => [
         {
