@@ -10,6 +10,7 @@ const HistoryOrderPage = lazy(() => import('~pages/HistoryOrder'));
 const EmployeesListPage = lazy(() => import('~pages/employeesList'));
 const OrderStatus = lazy(() => import('~pages/orderstatus'));
 const CreateWorkOrder = lazy(() => import('~pages/createWorkOrder'));
+const ProfilePage = lazy(() => import('~pages/profilePage'));
 
 export const Router = () => {
     const location = useLocation();
@@ -22,6 +23,7 @@ export const Router = () => {
                 <Route path={RoutesUrls.Employees} element={<EmployeesListPage />} />
                 <Route path={RoutesUrls.OrderStatus} element={<OrderStatus />} />
                 <Route path={RoutesUrls.historyOrder} element={<HistoryOrderPage />} />
+                <Route path={RoutesUrls.profile} element={<ProfilePage />} />
             </Route>
 
             <Route path="*" element={<h1>Страница не найдена</h1>} />

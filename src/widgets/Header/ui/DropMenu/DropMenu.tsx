@@ -1,9 +1,14 @@
 import { LogOut, User } from "lucide-react"
 import { FC } from "react"
+import { useNavigate } from "react-router-dom"
+
+import { RoutesUrls } from "~shared/lib/router"
 
 import { Avatar, AvatarFallback, AvatarImage, DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger, Typography } from "~shared/ui"
 
 export const DropMenu: FC = () => {
+    const navigate = useNavigate();
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -19,7 +24,7 @@ export const DropMenu: FC = () => {
                 <DropdownMenuLabel>Мой аккаунт</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuGroup>
-                    <DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => navigate(RoutesUrls.profile)}>
                         <User className="mr-2 h-4 w-4" />
                         <span>Профиль</span>
                     </DropdownMenuItem>

@@ -4,4 +4,5 @@ export enum RoutesUrls {
   CreateWorkOrder = '/create-order',
   Employees = '/employees',
   OrderStatus = '/order-status',
+  profile = '/profile',
 }
