@@ -62,7 +62,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({ icon, className, varia
           id={id}
           {...props}
         />
-        {icon ? <span className="absolute [&>svg]:w-4 [&>svg]:h-4 top-1/2 right-2 translate-y-[-50%] [&>svg]:stroke-[#A4A4A4]">{icon}</span> : null}
+        {icon ? <span className="absolute [&>svg]:w-4 [&>svg]:h-4 top-1/2 right-2 translate-y-[-50%] [&>svg]:stroke-[#A4A4A4] z-10">{icon}</span> : null}
       </div >
       {helperText?.length! > 0 ? <p id={id} className="text-right text-red-700 mr-5 break-words whitespace-normal">{helperText}</p> : null}
     </>
