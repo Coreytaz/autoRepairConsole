@@ -5,4 +5,5 @@ export enum RoutesUrls {
   Employees = '/employees',
   OrderStatus = '/order-status',
   profile = '/profile',
+  login = 'auth'
 }
