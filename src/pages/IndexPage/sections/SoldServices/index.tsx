@@ -21,27 +21,27 @@ const SoldServices: FC = () => {
     const rows = [
         {
             key: "1",
-            service: "двигатель",
+            service: "Тех. осмотр",
             sales: "20",
-            totalService: "120000руб",
+            totalService: "16000руб",
         },
         {
             key: "2",
-            service: "ТО",
+            service: "Масло ДВС",
             sales: "10",
-            totalService: "100000руб",
+            totalService: "10000руб",
         },
         {
             key: "3",
-            service: "Замена масла",
+            service: "Ремонт ДВС",
             sales: "4",
-            totalService: "120000руб",
+            totalService: "6000руб",
         },
     ];
 
     return (
         <Card className="p-5 mt-8">
-            <Typography tag='span' className="font-medium text-lg">Проданные услуги по кол-ву продаж</Typography>
+            <Typography tag='span' className="font-medium text-lg">Количество проданных услуг</Typography>
             <Table columns={columns} data={rows} />
         </Card>
     )

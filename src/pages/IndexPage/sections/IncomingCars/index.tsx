@@ -21,21 +21,21 @@ const IncomingCars: FC = () => {
     const rows = [
         {
             key: "1",
-            brand: "Марка",
-            model: "модель",
-            totalIncoming: "120000руб",
+            brand: "BMW",
+            model: "BMW X5",
+            totalIncoming: "12000руб",
         },
         {
             key: "2",
-            brand: "Марка",
-            model: "модель",
-            totalIncoming: "100000руб",
+            brand: "KIA",
+            model: "KIA Rio",
+            totalIncoming: "10000руб",
         },
         {
             key: "3",
-            brand: "Марка",
-            model: "модель",
-            totalIncoming: "120000руб",
+            brand: "LADA",
+            model: "LADA Granta",
+            totalIncoming: "12000руб",
         },
     ];
 
