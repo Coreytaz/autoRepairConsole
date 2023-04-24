@@ -3,7 +3,7 @@ import { FC, useCallback, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 
 
-import { BaseTextField, Button, CardContent, CardFooter, CardHeader, CardTitle } from '~shared/ui'
+import { BaseTextField, Button, CardContent, CardFooter, CardHeader, CardTitle, Loading } from '~shared/ui'
 
 import { useSignIn } from '~shared/lib/auth'
 
@@ -17,6 +17,7 @@ export interface SignInFormProps {
 }
 
 const SignInForm: FC<SignInFormProps> = ({ onChangeForm, onSignIn }) => {
+    const [loading, setLoading] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
     const form = useForm<SignInFormValues>({
         mode: 'onBlur',
@@ -26,23 +27,31 @@ const SignInForm: FC<SignInFormProps> = ({ onChangeForm, onSignIn }) => {
     const authSignIn = useSignIn();
 
     const handleSubmit = useCallback(
-        (payload: SignInFormValues) => {
-            mockSignIn(payload).then(({ data }) => {
-                if (
-                    authSignIn({
-                        token: data.token,
-                        tokenType: 'Bearer',
-                        expiresIn: data.ttl,
-                        authState: {
-                            ...mapFormDataToViewer(data)
-                        }
-                    })
-                ) {
-                    onSignIn(data);
-                }
-            })
+        async (payload: SignInFormValues) => {
+            try {
+                setLoading(true)
+
+                await mockSignIn(payload).then(({ data }) => {
+                    if (
+                        authSignIn({
+                            token: data.token,
+                            tokenType: 'Bearer',
+                            expiresIn: data.ttl,
+                            authState: {
+                                ...mapFormDataToViewer(data)
+                            }
+                        })
+                    ) {
+                        onSignIn(data);
+                    }
+                })
+            } catch (error) {
+                console.log(error);
+            } finally {
+                setLoading(false)
+            }
         },
-        [onSignIn, authSignIn]
+        [authSignIn, onSignIn]
     );
 
     const handleChangeForm = useCallback(
@@ -84,7 +93,7 @@ const SignInForm: FC<SignInFormProps> = ({ onChangeForm, onSignIn }) => {
             </CardContent>
             <CardFooter className="flex justify-between">
                 <Button variant='ghost' type="submit" onClick={handleChangeForm.bind(null, 'signUp')}>Создать аккаунт</Button>
-                <Button type="submit" onClick={form.handleSubmit(handleSubmit)}>Войти</Button>
+                <Button type="submit" onClick={form.handleSubmit(handleSubmit)} isLoading={loading} disabled={loading}>Войти</Button>
             </CardFooter>
         </>
     )

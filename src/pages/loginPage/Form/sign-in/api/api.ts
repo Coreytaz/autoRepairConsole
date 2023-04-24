@@ -24,7 +24,7 @@ export const mockSignIn = async (_data?: ApiSignInData) => {
         type: 'Bearer',
       },
     };
-  }, 1000);
+  }, 1500);
 
   return result as ApiResponseData<ApiSignInResponseData>;
 };

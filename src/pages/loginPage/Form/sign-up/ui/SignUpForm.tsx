@@ -5,7 +5,7 @@ import { Eye, EyeOff } from 'lucide-react';
 
 import { BaseTextField, Button, CardContent, CardFooter, CardHeader, CardTitle } from '~shared/ui';
 
-import { SignUpFormValues, mapFormDataToApiData } from '../model';
+import { SignUpFormValues } from '../model';
 
 export interface SignUpFormProps {
   onSignUp?: (payload: unknown) => void;
