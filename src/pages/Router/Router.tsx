@@ -1,10 +1,12 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { Route, Routes, useLocation } from 'react-router-dom';
 
-import { lazy } from 'react';
+import { lazy, useEffect, useMemo } from 'react';
 
 import { RoutesUrls } from '~shared/lib/router';
 import { BaseLayout } from '~pages/layout';
-import { RequireAuth } from '~shared/lib/auth';
+import { RequireAuth, useAuthHeader, useAuthUser, useIsAuthenticated } from '~shared/lib/auth';
+import { setViewer } from '~entities/viewer';
 
 const IndexPage = lazy(() => import('~pages/IndexPage'));
 const HistoryOrderPage = lazy(() => import('~pages/HistoryOrder'));
@@ -14,9 +16,24 @@ const CreateWorkOrder = lazy(() => import('~pages/createWorkOrder'));
 const ProfilePage = lazy(() => import('~pages/profilePage'));
 const LoginPage = lazy(() => import('~pages/loginPage'));
 
-const createProtectedElement = (component: JSX.Element) => (
-    <RequireAuth loginPath={RoutesUrls.login}>{component}</RequireAuth>
-);
+const createProtectedElement = (component: JSX.Element) => {
+    const isAuth = useIsAuthenticated();
+    const getToken = useAuthHeader();
+    const auth = useAuthUser()
+
+    const token = useMemo(() => getToken(), [getToken]);
+    const data = useMemo(() => auth(), [auth]);
+
+    useEffect(() => {
+
+        if (isAuth() && token) {
+            setViewer(data as any);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [token, isAuth, data])
+
+    return (<RequireAuth loginPath={RoutesUrls.login}>{component}</RequireAuth>)
+};
 
 export const Router = () => {
     const location = useLocation();

@@ -1,18 +1,20 @@
 import { FC } from 'react'
 import { FormProvider, useForm } from 'react-hook-form';
+import { shallow } from 'zustand/shallow';
 
 import { DragDropAvatar } from '~entities/DragDrop';
+import { useStoreViewer } from '~entities/viewer';
 
 import { BaseTextField, Button, Card, Typography } from '~shared/ui';
 
 const ProfilePage: FC = () => {
-    const data = {
-        FullName: 'Петров Петр Петрович',
-        img: 'https://github.com/shadcn.png'
-    }
+    const viewer = useStoreViewer((state) => ({
+        FullName: state.Fullname,
+        avatar: state.avatar
+    }), shallow)
 
     const methods = useForm({
-        defaultValues: data
+        defaultValues: viewer
     });
 
     const onSubmit = (data: any) => {
@@ -28,7 +30,7 @@ const ProfilePage: FC = () => {
                 <FormProvider {...methods}>
                     <form onSubmit={methods.handleSubmit(onSubmit)} className="mt-5 flex flex-col gap-5 items-center">
                         <div className='flex gap-3 flex-col max-w-lg w-full items-center'>
-                            <DragDropAvatar name="img" />
+                            <DragDropAvatar name="avatar" />
                             <BaseTextField
                                 className='h-10'
                                 name="FullName"

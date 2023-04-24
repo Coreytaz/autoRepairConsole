@@ -8,7 +8,7 @@ import { BaseTextField, Button, CardContent, CardFooter, CardHeader, CardTitle }
 import { SignUpFormValues, mapFormDataToApiData } from '../model';
 
 export interface SignUpFormProps {
-  onSignUp: (payload: unknown) => void;
+  onSignUp?: (payload: unknown) => void;
   onChangeForm: (payload: 'signIn') => void;
 }
 
@@ -93,7 +93,7 @@ const SignUpForm: FC<SignUpFormProps> = ({ onChangeForm, onSignUp }) => {
         </FormProvider>
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Button variant='ghost' type="submit" onClick={handleChangeForm.bind(null, 'signIn')}>Создать аккаунт</Button>
+        <Button variant='ghost' type="submit" onClick={handleChangeForm.bind(null, 'signIn')}>Войти</Button>
         <Button type="submit" onClick={form.handleSubmit(handleSubmit)}>Зарегистрироваться</Button>
       </CardFooter>
     </>

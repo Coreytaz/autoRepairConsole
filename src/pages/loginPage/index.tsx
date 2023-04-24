@@ -6,10 +6,13 @@ import { Card } from '~shared/ui';
 
 import { useIsAuthenticated } from '~shared/lib/auth';
 
+import { setViewer } from '~entities/viewer';
+
 import { SignInForm } from './Form/sign-in';
 import { SignUpForm } from './Form/sign-up';
 import { SignInFormProps } from './Form/sign-in/ui/SignInForm';
 import { SignUpFormProps } from './Form/sign-up/ui/SignUpForm';
+import { mapFormDataToViewer } from './Form/sign-in/model/mappers';
 
 type LoginPageForm = 'signIn' | 'signUp';
 
@@ -19,7 +22,8 @@ const LoginPage: FC = () => {
     const [currentForm, setCurrentForm] = useState<LoginPageForm>('signIn');
 
     const handleSignIn: SignInFormProps['onSignIn'] = useCallback(
-        () => {
+        (data) => {
+            setViewer(mapFormDataToViewer(data))
             navigate('/', { replace: true });
         },
         [navigate]

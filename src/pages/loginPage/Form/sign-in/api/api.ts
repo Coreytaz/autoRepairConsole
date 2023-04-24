@@ -8,16 +8,17 @@ export const signIn = (data: ApiSignInData) => {
   return api.post<any, ApiResponseData<ApiSignInResponseData>>(routes.signIn(), data);
 };
 
-export const refresh = (token: string) => {
-  return api.post<any, ApiResponseData<ApiSignInResponseData>>(routes.refresh(), token);
-};
-
 export const mockSignIn = async (_data?: ApiSignInData) => {
   let result: unknown = null;
 
   await setAsyncTimeout(() => {
     result = {
       data: {
+        id: '1',
+        Fullname: 'Петров Петр Петрович',
+        login: '2',
+        email: '3',
+        avatar: 'https://github.com/shadcn.png',
         token: 'token',
         ttl: 120,
         type: 'Bearer',

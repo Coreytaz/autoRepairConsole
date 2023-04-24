@@ -8,6 +8,8 @@ import { BaseTextField, Button, CardContent, CardFooter, CardHeader, CardTitle }
 import { useSignIn } from '~shared/lib/auth'
 
 import { SignInData, SignInFormValues } from '../model'
+import { mockSignIn } from '../api'
+import { mapFormDataToViewer } from '../model/mappers'
 
 export interface SignInFormProps {
     onSignIn: (payload: SignInData) => void;
@@ -25,21 +27,20 @@ const SignInForm: FC<SignInFormProps> = ({ onChangeForm, onSignIn }) => {
 
     const handleSubmit = useCallback(
         (payload: SignInFormValues) => {
-            console.log(payload)
-
-            if (
-                authSignIn({
-                    token: 'token',
-                    tokenType: 'Bearer',
-                    expiresIn: 12000000
-                })
-            ) {
-                onSignIn({
-                    token: 'token',
-                    ttl: 120,
-                    type: 'Bearer',
-                });
-            }
+            mockSignIn(payload).then(({ data }) => {
+                if (
+                    authSignIn({
+                        token: data.token,
+                        tokenType: 'Bearer',
+                        expiresIn: data.ttl,
+                        authState: {
+                            ...mapFormDataToViewer(data)
+                        }
+                    })
+                ) {
+                    onSignIn(data);
+                }
+            })
         },
         [onSignIn, authSignIn]
     );
