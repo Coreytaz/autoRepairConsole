@@ -8,4 +8,5 @@ export * from './DropDownMenu';
 export * from './Form';
 export * from './Toast';
 export * from './Loading';
+export * from './Dialog';
 export { default as Table } from './Table';
