@@ -9,7 +9,7 @@ function range(start: number, end: number) {
 }
 
 const NewAvtoInfo: FC<{ methods: UseFormReturn<FieldValues, any> }> = ({ methods }) => {
- 
+
 
     const totalProggresSteps = useMemo(() => range(1950, 2023).map((item) => {
         return {
@@ -69,7 +69,6 @@ const NewAvtoInfo: FC<{ methods: UseFormReturn<FieldValues, any> }> = ({ methods
                         rules={{ pattern: { message: 'Не правильный VIN-номер', value: /^[A-HJ-NPR-Z\d]{17}$/ } }}
                     />
                 </div>
-               
             </form>
         </div>
     )

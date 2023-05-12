@@ -3,12 +3,10 @@ import { FieldValues, FormProvider, UseFormReturn } from 'react-hook-form';
 import { useSteps } from 'react-step-builder';
 
 import { BaseTextField, Button, Typography } from '~shared/ui';
-import { Card } from '~shared/ui';
-import {  Dialog, DialogContent, DialogDescription, DialogFooter,
-    DialogHeader, DialogTitle,  DialogTrigger } from '~shared/ui';
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '~shared/ui';
 
-    import NewClientInfo from "./NewClientInfo";
-    import NewAvtoInfo from "./NewAutoInfo";
+import NewClientInfo from "./NewClientInfo";
+import NewAvtoInfo from "./NewAutoInfo";
 
 
 const ClientInfo: FC<{ methods: UseFormReturn<FieldValues, any> }> = ({ methods }) => {
@@ -44,33 +42,26 @@ const ClientInfo: FC<{ methods: UseFormReturn<FieldValues, any> }> = ({ methods 
                 </div>
                 <Button type='submit'>Далее</Button>
             </form>
-    <Dialog>
-        <DialogTrigger asChild>
-            <Button variant="default" className="mt-7 sm:mx-4 xl:mx-8">Добавить клиента</Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[460px]">
-               
-            <DialogHeader>
-               <DialogTitle>Карточка клиента</DialogTitle>
-             </DialogHeader>
+            <Dialog>
+                <DialogTrigger asChild>
+                    <Button variant="default" className="mt-7 sm:mx-4 xl:mx-8">Добавить клиента</Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[460px]">
+                    <DialogHeader>
+                        <DialogTitle>Карточка клиента</DialogTitle>
+                    </DialogHeader>
+                    <div className="grid gap-4 py-4">
+                        <FormProvider {...methods}>
+                            <NewClientInfo methods={methods} />
+                            <NewAvtoInfo methods={methods} />
+                        </FormProvider>
+                    </div>
+                    <DialogFooter>
+                        <Button type="submit">Сохранить</Button>
+                    </DialogFooter>
 
-             <div className="grid gap-4 py-4">
-             <FormProvider {...methods}>
-                  
-                        <NewClientInfo methods={methods} />
-                        <NewAvtoInfo methods={methods} />      
-                   
-            </FormProvider>
-            </div>
-
-             <DialogFooter>
-                 <Button type="submit">Сохранить</Button>
-             </DialogFooter>
-        
-      </DialogContent>
-    </Dialog>
-
-
+                </DialogContent>
+            </Dialog>
         </div>
     )
 }

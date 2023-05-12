@@ -1,11 +1,7 @@
 import { FC } from 'react'
 import { FieldValues, UseFormReturn } from 'react-hook-form';
-import { useSteps } from 'react-step-builder';
 
-
-
-
-import { BaseTextField, Button, Typography } from '~shared/ui';
+import { BaseTextField, Typography } from '~shared/ui';
 
 const NewClientInfo: FC<{ methods: UseFormReturn<FieldValues, any> }> = ({ methods }) => {
 
@@ -41,7 +37,7 @@ const NewClientInfo: FC<{ methods: UseFormReturn<FieldValues, any> }> = ({ metho
                         type="date"
                     />
                 </div>
-               
+
             </form>
         </div>
     )
