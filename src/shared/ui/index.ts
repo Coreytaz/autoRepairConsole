@@ -9,4 +9,6 @@ export * from './Form';
 export * from './Toast';
 export * from './Loading';
 export * from './Dialog';
+export * from './Popover';
+export * from './Command';
 export { default as Table } from './Table';

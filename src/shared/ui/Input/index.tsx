@@ -9,7 +9,7 @@ import { Label } from "../Label";
 import { normalizeNumberTel, normalizeStateNumber } from "./normalizeInput";
 
 const inputVariants = cva(
-  "w-full bg-white px-3 py-2 pr-7 border-solid border-1 border-[#EBEBEB] appearance-none rounded-lg leading-none outline-none focus:shadow-[0_0_0_1px_black]",
+  "w-full bg-white px-3 py-2 pr-7 border-solid border-1 border-[#EBEBEB] appearance-none rounded-lg outline-none focus:shadow-[0_0_0_1px_black]",
   {
     variants: {
       variant: {

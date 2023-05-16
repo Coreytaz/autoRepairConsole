@@ -1,8 +1,7 @@
 import { FC, useMemo } from 'react'
 import { FieldValues, UseFormReturn } from 'react-hook-form';
-import { useSteps } from 'react-step-builder';
 
-import { BaseRadioField, BaseTextField, Button, Typography } from '~shared/ui';
+import { BaseRadioField, BaseTextField, Typography } from '~shared/ui';
 
 function range(start: number, end: number) {
     return Array(end - start + 1).fill({}).map((_, idx) => start + idx)

@@ -35,7 +35,7 @@ const ServiceInfo: FC<{ methods: UseFormReturn<FieldValues, any> }> = ({ methods
 
     const EmployeeItem = useMemo(() => [
         {
-            value: 'Иванов-Иван-Иваныч',
+            value: 'Иванов Иван Иваныч',
             title: 'Иванов Иван Иваныч'
         },
     ], [])

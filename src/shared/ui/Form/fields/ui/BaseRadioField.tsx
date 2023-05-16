@@ -1,11 +1,13 @@
-import { useMemo, useRef, useState } from 'react';
+import { ReactNode, useMemo, useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
-import { ChevronDown, X } from 'lucide-react';
+import { Check, ChevronsUpDown } from 'lucide-react';
 
 import { Input } from '~shared/ui/Input';
 
-import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuTrigger } from '~shared/ui';
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, Popover, PopoverContent, PopoverTrigger } from '~shared/ui';
+
+import { cn } from '~shared/lib';
 
 import { CommonTextFieldProps } from '../types';
 
@@ -17,6 +19,7 @@ export type selectItemProps = {
 
 export interface BaseRadioFieldProps<T> extends CommonTextFieldProps {
     selectItem: T
+    actions?: ReactNode
 }
 
 export const BaseRadioField: React.FC<BaseRadioFieldProps<selectItemProps[]>> = ({
@@ -26,17 +29,14 @@ export const BaseRadioField: React.FC<BaseRadioFieldProps<selectItemProps[]>> = 
     rules = {},
     required,
     selectItem,
+    actions,
     ...props
 }) => {
-    const inputRef = useRef<HTMLInputElement>(null!)
-    const [search, setSearch] = useState('')
+    const [open, setOpen] = useState(false)
+    const [value, setValue] = useState("")
     const { control } = useFormContext();
 
-    const title = (value: string) => {
-        return selectItem.filter((item) => item.value === value)[0]?.title
-    }
-
-    const filterSelect = useMemo(() => selectItem.filter((item) => item.title?.toLowerCase().includes(search.toLowerCase())), [search, selectItem])
+    const title = (value: string) => selectItem.filter((item) => item.value === value)[0]?.title
 
     const computedRequired = useMemo(() => {
         if (!required) {
@@ -57,46 +57,48 @@ export const BaseRadioField: React.FC<BaseRadioFieldProps<selectItemProps[]>> = 
             defaultValue={defaultValue || ''}
             render={({ field, fieldState }) => {
                 return (
-                    <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                            <div className='cursor-pointer whitespace-nowrap w-full'>
-                                <Input
-                                    labelName="Год выпуска"
-                                    error={!!fieldState.error}
-                                    helperText={fieldState?.error?.message}
-                                    {...props}
-                                    {...field}
-                                    value={title(field.value) || ''}
-                                    onChange={(value) => {
-                                        field.onChange(value);
-                                        onChange && onChange(value);
-                                    }}
-                                    icon={<ChevronDown />} />
-                            </div>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent onFocus={() => inputRef.current.focus()}>
-                            <DropdownMenuLabel>
-                                <Input
-                                    ref={inputRef}
-                                    className="shadow-[0_0_0_1px_black]"
-                                    value={search}
-                                    onChange={(e) => setSearch(e.target.value)}
-                                    icon={search.length > 0 ? <span className="cursor-pointer" onClick={() => setSearch('')}><X /></span> : null} />
-                            </DropdownMenuLabel>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuRadioGroup className="h-32 overflow-scroll overflow-x-hidden" {...field}
-                                onValueChange={(value) => {
+                    <Popover open={open} onOpenChange={setOpen}>
+                        <PopoverTrigger asChild>
+                            <Input
+                                autoComplete="off"
+                                variant='dark'
+                                error={!!fieldState.error}
+                                helperText={fieldState?.error?.message}
+                                {...props}
+                                {...field}
+                                onChange={(value) => {
                                     field.onChange(value);
-                                }}>
-                                {filterSelect.length > 0
-                                    ?
-                                    filterSelect.map((item) => (
-                                        <DropdownMenuRadioItem key={item.value} value={item.value}>{item.title ? item.title : item.value}</DropdownMenuRadioItem>
-                                    ))
-                                    : <DropdownMenuLabel>Ничего не найдено</DropdownMenuLabel>}
-                            </DropdownMenuRadioGroup>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                                    onChange && onChange(value);
+                                }}
+                                value={title(field.value) || ''}
+                                icon={<ChevronsUpDown />} {...props} className="text-left" />
+                        </PopoverTrigger>
+                        <PopoverContent className="w-[200px] p-0">
+                            <Command>
+                                <CommandInput placeholder={`Поиск ${props?.labelName?.toLowerCase()}...`} />
+                                <CommandEmpty className='flex items-center flex-col gap-5 p-2'>{props?.labelName} не найден. {actions}</CommandEmpty>
+                                <CommandGroup className='h-64 overflow-scroll overflow-x-hidden'>
+                                    {selectItem.map((item) => (
+                                        <CommandItem
+                                            key={item.value}
+                                            onSelect={(currentValue) => {
+                                                field.onChange(currentValue === value ? "" : item.value)
+                                                setValue(currentValue === value ? "" : currentValue);
+                                                setOpen(false);
+                                            }}
+                                        >
+                                            <Check
+                                                className={cn(
+                                                    "mr-2 h-4 w-4",
+                                                    value === item.value.toLowerCase() ? "opacity-100" : "opacity-0"
+                                                )} />
+                                            {item.title}
+                                        </CommandItem>
+                                    ))}
+                                </CommandGroup>
+                            </Command>
+                        </PopoverContent>
+                    </Popover>
                 );
             }}
             rules={{
