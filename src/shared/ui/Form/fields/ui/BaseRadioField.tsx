@@ -73,7 +73,7 @@ export const BaseRadioField: React.FC<BaseRadioFieldProps<selectItemProps[]>> = 
                                 value={title(field.value) || ''}
                                 icon={<ChevronsUpDown />} {...props} className="text-left" />
                         </PopoverTrigger>
-                        <PopoverContent className="w-[200px] p-0">
+                        <PopoverContent className="w-[320px] p-0">
                             <Command>
                                 <CommandInput placeholder={`Поиск ${props?.labelName?.toLowerCase()}...`} />
                                 <CommandEmpty className='flex items-center flex-col gap-5 p-2'>{props?.labelName} не найден. {actions}</CommandEmpty>
