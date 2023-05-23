@@ -31,7 +31,8 @@ const columns = [
 const rows = [
   { key: "1", nameOfEmployee: "Петров И. И.",  post: "Механик", contacts: "+7-900-123-45-67" },
   { key: "2", nameOfEmployee: "Попов П. К.",  post: "Механик", contacts: "+7-900-132-45-67" },
-  { key: "3", nameOfEmployee: "Иванов В. Д",  post: "Механик", contacts: "+7-900-213-45-67" },
+  { key: "3", nameOfEmployee: "Иванов В. Д",  post: "Электрик", contacts: "+7-900-213-45-67" },
+   { key: "4", nameOfEmployee: "Карпов П. Б",  post: "Электрик", contacts: "+7-900-213-45-67" }
   
 ];
 

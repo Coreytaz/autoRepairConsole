@@ -17,8 +17,20 @@ const ClientInfo: FC<{ methods: UseFormReturn<FieldValues, any> }> = ({ methods 
 
     const ClientItem = useMemo(() => [
         {
-            value: 'Иванов Иван Иваныч',
-            title: 'Иванов Иван Иваныч'
+            value: 'Петров И. И.',
+            title: 'Петров И. И.'
+        },
+        {
+            value: 'Попов П. К.',
+            title: 'Попов П. К.'
+        },
+        {
+            value: 'Иванов В. Д',
+            title: 'Иванов В. Д'
+        },
+        {
+            value: 'Карпов П. Б',
+            title: 'Карпов П. Б'
         },
     ], [])
 
